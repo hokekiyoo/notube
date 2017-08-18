@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "NoTube",
+  "description": "ほら、横に積んでいる仕事をしよう",
+  "version": "1.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts":[
+    {
+      "matches" : ["https://www.youtube.com/*"],
+      "excluded_matches" : ["https://www.youtube.com/watch?v=_jCyFVgmSSo&t=231s"],
+      "js":["script.js"],
+      "run_at" : "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/"
+  ]
+}
