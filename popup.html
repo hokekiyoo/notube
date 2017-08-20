@@ -1,6 +1,19 @@
 <!doctype html>
-<p>I am popup.html</p>
-<button id="btn">hello</button><br>
-msg from background.js: <div id="div"></div>
-
+<!-- 入力 -->
+<h3>Register</h3>
+<form  name="info">
+    URL   
+    <input type="text" name="url">
+    TIMER(min)    
+    <input type="text" name="time"><br>
+    <input type="button" value="register" id="btn_register">
+</form>
+<h3>Kill</h3>
+<form name="kill">
+    <input type="checkbox" name="youtube" value="youtube" checked>YouTube
+    <input type="checkbox" name="twitter" value="twitter" checked>Twitter    
+</form>
+<h3>Start</h3>
+<input id="btn_start" type="button" value="start">
 <script type="text/javascript" src="popup.js"></script>
+    

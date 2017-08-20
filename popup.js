@@ -1,15 +1,25 @@
-console.log("I am popup.js");
-
-document.getElementById("btn").onclick = function(e){
-  hello();
+// イベントリスナーを table に追加
+var el = document.getElementById("btn_register");
+el.addEventListener("click", regist, false);
+//　登録
+function regist() {
+  var url = info.url.value;  
+  var time = info.time.value;
+  localStorage.setItem("url", url);
+  localStorage.setItem("time", time);
 }
-
-function hello() {
-  alert("hello");
+// スタート
+var start = document.getElementById('btn_start');
+// start.addEventListener("click", setTimeout(send, localStorage.getItem("time"), false);
+start.addEventListener("click", function(){
+  var min = parseFloat(localStorage.getItem("time"))*1000*60;
+  setTimeout(send,min);
+  }, false);
+function send(){
+  
   chrome.runtime.sendMessage({
-      greeting: "hello"
-    },
-    function(response) {
-      document.getElementById("div").textContent = response.msg;
-    });
+      type: "close_youtube",
+      value: {"youtube_checked":kill.youtube.checked,
+              "twitter_checked":kill.twitter.checked}
+  });
 }

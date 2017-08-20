@@ -1,2 +1,2 @@
-# notube_dojob
+# notube
 仕事をしなさい？

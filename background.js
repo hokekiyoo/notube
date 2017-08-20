@@ -1,23 +1,25 @@
+// popupのボタンによって。
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
     alert("ダメダヨ");
     chrome.tabs.getAllInWindow(null, function(tabs){
       for (var i = 0; i < tabs.length; i++){
         if (tabs[i].url.match(/www.youtube.com/)){
-          chrome.tabs.remove(tabs[i].id)
+          if(request.value["youtube_checked"]){
+            chrome.tabs.remove(tabs[i].id);
+          }
+        }
+        if (tabs[i].url.match(/twitter.com/)){
+          if(request.value["twitter_checked"]){
+            chrome.tabs.remove(tabs[i].id);
+          }        
         }
       }
-      window.open('http://blog.hatena.ne.jp/', '_blank');
+    if(localStorage.getItem("url")==null||localStorage.getItem("url")==""){
+      window.open("http://www.procrasist.com", '_blank');
     }
-    );
-  }
-);
-
-// popupのボタンによって。
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.greeting == "hello")
-      sendResponse({
-        msg: "goodbye!"
-      });
+    else{
+      window.open(localStorage.getItem("url"), '_blank');
+    }
   });
+});

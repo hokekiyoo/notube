@@ -7,14 +7,6 @@
   "background": {
     "scripts": ["background.js"]
   },
-  // "content_scripts":[
-  //   {
-  //     "matches" : ["https://www.youtube.com/*"],
-  //     "excluded_matches" : ["https://www.youtube.com/watch?v=_jCyFVgmSSo&t=231s"],
-  //     "js":["script.js"],
-  //     "run_at" : "document_end"
-  //   }
-  // ],
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
