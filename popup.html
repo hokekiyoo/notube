@@ -1,19 +1,22 @@
 <!doctype html>
 <!-- 入力 -->
-<h3>Register</h3>
+<h4>Register</h4>
 <form  name="info">
     URL   
-    <input type="text" name="url">
+    <input type="text" name="url" id="txt_url">
     TIMER(min)    
-    <input type="text" name="time"><br>
+    <input type="text" name="time" id="txt_time"><br>
     <input type="button" value="register" id="btn_register">
 </form>
-<h3>Kill</h3>
+<h4>Kill</h4>
 <form name="kill">
     <input type="checkbox" name="youtube" value="youtube" checked>YouTube
     <input type="checkbox" name="twitter" value="twitter" checked>Twitter    
 </form>
-<h3>Start</h3>
+<h4>Start</h4>
 <input id="btn_start" type="button" value="start">
+<span id="textDiv"></span>
 <script type="text/javascript" src="popup.js"></script>
-    
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
