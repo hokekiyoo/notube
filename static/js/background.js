@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(
         else{
           window.open(localStorage.getItem("url"), '_blank');
         }
-        localStorage.setItem("timer_on","OFF")
+        localStorage.setItem("timer_on",false)
         alert("ダメダヨ");
         });
     },min);

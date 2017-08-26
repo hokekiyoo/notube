@@ -8,10 +8,12 @@ var now_t = new Date();
 diff_min = now_t.getTime() - localStorage.getItem("start_time");
 var remain = parseInt(localStorage.getItem("time") - diff_min/(1000*60));
 if(remain>=0){
-  div.textContent = "Remaining : "+  remain+ " min, ";
+  div.textContent = "Remaining :"+  remain+ " min";
+  div.setAttribute("class", "alert alert-danger");
   // document.getElementById("btn_start").disabled = "true";
 }else{
   div.textContent = "Push Button to Start!";
+  div.setAttribute("class", "alert alert-primary");
   document.getElementById("btn_start").disabled = "";
 }
 var text = div.textContent; 
@@ -25,10 +27,6 @@ function regist() {
   var time = document.getElementById("txt_time").value;
   localStorage.setItem("url", url);
   localStorage.setItem("time", time);
-  // var message = "Register Completed\n"+
-  //               "URL: "+document.getElementById("txt_url").value+"\n"+
-  //               "TIMER: "+document.getElementById("txt_time").value;
-  // alert(message);  
 }
 // スタート
 var start = document.getElementById('btn_start');
