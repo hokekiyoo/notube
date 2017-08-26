@@ -8,10 +8,10 @@ var now_t = new Date();
 diff_min = now_t.getTime() - localStorage.getItem("start_time");
 var remain = parseInt(localStorage.getItem("time") - diff_min/(1000*60));
 if(remain>=0){
-  div.textContent = "REMAINING : "+  remain+ " min";
+  div.textContent = "Remaining : "+  remain+ " min, ";
   // document.getElementById("btn_start").disabled = "true";
 }else{
-  div.textContent = "PUSH BUTTON";
+  div.textContent = "Push Button to Start!";
   document.getElementById("btn_start").disabled = "";
 }
 var text = div.textContent; 
@@ -21,10 +21,14 @@ var el = document.getElementById("btn_register");
 el.addEventListener("click", regist, false);
 //　登録
 function regist() {
-  var url = info.url.value;  
-  var time = info.time.value;
+  var url = document.getElementById("txt_url").value;  
+  var time = document.getElementById("txt_time").value;
   localStorage.setItem("url", url);
   localStorage.setItem("time", time);
+  // var message = "Register Completed\n"+
+  //               "URL: "+document.getElementById("txt_url").value+"\n"+
+  //               "TIMER: "+document.getElementById("txt_time").value;
+  // alert(message);  
 }
 // スタート
 var start = document.getElementById('btn_start');
@@ -38,7 +42,7 @@ start.addEventListener("click", function(){
 function send(){  
   chrome.runtime.sendMessage({
       type: "close_youtube",
-      value: {"youtube_checked":kill.youtube.checked,
-              "twitter_checked":kill.twitter.checked}
-  });
+      value: {"youtube_checked":document.getElementById("check_youtube").checked,
+              "twitter_checked":document.getElementById("check_twitter").checked}
+    });
 }
