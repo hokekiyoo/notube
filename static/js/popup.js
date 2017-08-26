@@ -1,6 +1,6 @@
 // URLと時間の保存された設定
-document.getElementById("txt_url").value = localStorage.getItem("url") || "http://www.procrasist.com/";
-document.getElementById("txt_time").value = localStorage.getItem("time") || 1;
+document.getElementById("txt_url").value = localStorage.getItem("url") || "http://www.procrasist.com/notube";
+document.getElementById("txt_time").value = localStorage.getItem("time") || 30;
 
 // 時刻の取得
 var div = document.getElementById("textDiv");
