@@ -2,8 +2,7 @@
 document.getElementById("txt_url").value = localStorage.getItem("url") || "http://www.procrasist.com/notube";
 document.getElementById("txt_time").value = localStorage.getItem("time") || 30;
 
-for( let i = 0; i < 5; ++i )
-  document.getElementById("txt_whiteUrl"+(i+1)).value = localStorage.getItem("whiteUrl"+(i+1)) || "";
+document.getElementById("txt_whiteUrl").value = localStorage.getItem("whiteUrlM") || "";
 
 clearInterval( localStorage.getItem( "iId" ) );
 
@@ -13,7 +12,7 @@ var iId = setInterval( function() {
   var now_t = new Date();
   diff_min = now_t.getTime() - localStorage.getItem( "start_time" );
   var remain = localStorage.getItem("time") - diff_min/(1000*60);
-  if( remain >= 0 ) {
+  if( remain >= 0 && localStorage.getItem( "timer_on" ) === "true" ) {
     var minR = Math.floor(remain);
     div.textContent = "Remaining: " + minR + "m " + ("0"+Math.floor((remain-minR)*60)).slice(-2) + "s";
     div.setAttribute("class", "alert alert-danger");
@@ -51,9 +50,11 @@ document.getElementById( "btn_start" ).addEventListener( "click", function(){
 }, false );
 
 document.getElementById( "btn_add" ).addEventListener( "click", function(){
-  for( let i = 0; i < 5; ++i )
-  {
-    var wurl = document.getElementById( "txt_whiteUrl"+(i+1) ).value;
-    localStorage.setItem( "whiteUrl"+(i+1), wurl );
-  }
+  var wurls = document.getElementById( "txt_whiteUrl" ).value;
+  localStorage.setItem( "whiteUrl", wurls );
+  localStorage.setItem( "whiteUrlM", wurls );
+}, false );
+
+document.getElementById( "txt_whiteUrl" ).addEventListener( "input", function(){
+  localStorage.setItem( "whiteUrlM", document.getElementById( "txt_whiteUrl" ).value );
 }, false );
