@@ -66,19 +66,19 @@ var iId = setInterval( function() {
 localStorage.setItem( "iId", iId );
 
 // イベントリスナーを table に追加
-document.getElementById( "btn_register" ).addEventListener( "click", function() {
+document.getElementById( "btn_register" ).onclick = function() {
   var url = document.getElementById("txt_url").value;  
   var time = document.getElementById("txt_time").value;
   localStorage.setItem( "url", url );
   localStorage.setItem( "time", time );
-}, false );
+};
 
-document.getElementById( "btn_add" ).addEventListener( "click", function(){
+document.getElementById( "btn_add" ).onclick = function(){
   var wurls = document.getElementById( "txt_whiteUrl" ).value;
   localStorage.setItem( "whiteUrl", wurls );
   localStorage.setItem( "whiteUrlM", wurls );
-}, false );
+};
 
-document.getElementById( "txt_whiteUrl" ).addEventListener( "input", function(){
+document.getElementById( "txt_whiteUrl" ).oninput = function(){
   localStorage.setItem( "whiteUrlM", document.getElementById( "txt_whiteUrl" ).value );
-}, false );
+};
