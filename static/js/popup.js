@@ -2,6 +2,11 @@
 document.getElementById("txt_url").value = localStorage.getItem("url") || "http://www.procrasist.com/notube";
 document.getElementById("txt_time").value = localStorage.getItem("time") || 30;
 
+var youtubeC = localStorage.getItem( "youtube_checked" ), twitterC = localStorage.getItem( "twitter_checked" );
+
+document.getElementById("check_youtube").checked = youtubeC == null ? true : youtubeC === "true";
+document.getElementById("check_twitter").checked = twitterC == null ? true : twitterC === "true";
+
 document.getElementById("txt_whiteUrl").value = localStorage.getItem("whiteUrlM") || "";
 
 clearInterval( localStorage.getItem( "iId" ) );
@@ -12,15 +17,49 @@ var iId = setInterval( function() {
   var now_t = new Date();
   diff_min = now_t.getTime() - localStorage.getItem( "start_time" );
   var remain = localStorage.getItem("time") - diff_min/(1000*60);
+  var btnStart = document.getElementById( "btn_start" ),
+      btnClear = document.getElementById( "btn_clear" );
+
+  if( remain <= 0 && localStorage.getItem( "timer_on" ) === "true" )
+  {
+    chrome.runtime.sendMessage({
+      type: "close_youtube",
+      value: {}
+    });
+  }
+
   if( remain >= 0 && localStorage.getItem( "timer_on" ) === "true" ) {
     var minR = Math.floor(remain);
     div.textContent = "Remaining: " + minR + "m " + ("0"+Math.floor((remain-minR)*60)).slice(-2) + "s";
     div.setAttribute("class", "alert alert-danger");
     // document.getElementById("btn_start").disabled = "true";
+
+    btnStart.onclick = null;
+    btnStart.setAttribute( "class", "btn btn-default" );
+    btnClear.onclick = function() {
+      localStorage.setItem( "timer_on", false );
+    };
+    btnClear.setAttribute( "class", "btn btn-primary" );
   } else {
     div.textContent = "Push Button to Start!";
-    div.setAttribute("class", "alert alert-primary");
-    document.getElementById("btn_start").disabled = "";
+    div.setAttribute( "class", "alert alert-primary" );
+    //document.getElementById("btn_start").disabled = "";
+    
+    if( localStorage.getItem( "timer_on" ) === "true" || btnStart.getAttribute( "class" ) == "btn btn-default" )
+    {
+      localStorage.setItem( "timer_on", false );
+      
+      btnStart.onclick = function() {
+        var start_t = new Date();
+        localStorage.setItem( "timer_on", true );
+        localStorage.setItem( "start_time", start_t.getTime() );
+        localStorage.setItem( "youtube_checked", document.getElementById("check_youtube").checked );
+        localStorage.setItem( "twitter_checked", document.getElementById("check_twitter").checked );
+      };
+      btnStart.setAttribute( "class", "btn btn-primary" );
+      btnClear.onclick = null;
+      btnClear.setAttribute( "class", "btn btn-default" );
+    }
   }
 }, 1000/60 );
 
@@ -32,21 +71,6 @@ document.getElementById( "btn_register" ).addEventListener( "click", function() 
   var time = document.getElementById("txt_time").value;
   localStorage.setItem( "url", url );
   localStorage.setItem( "time", time );
-}, false );
-
-// スタート
-document.getElementById( "btn_start" ).addEventListener( "click", function(){
-  var start_t = new Date();
-  localStorage.setItem("timer_on", true);
-  localStorage.setItem("start_time", start_t.getTime());
-
-  chrome.runtime.sendMessage({
-    type: "close_youtube",
-    value: {
-      "youtube_checked" : document.getElementById("check_youtube").checked,
-      "twitter_checked" : document.getElementById("check_twitter").checked
-    }
-  });
 }, false );
 
 document.getElementById( "btn_add" ).addEventListener( "click", function(){
